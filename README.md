@@ -14,7 +14,7 @@ When you've selected the local optimization file, be sure to go into the file to
 
 Once all of this has been settled, you just have to run fc_loop.py with your selected parameters. We recommend looking through the code to see all parameters that you can tinker with. In my experience, the following works perfectly well on a GPU:
 
-python3 fc_loop.py true --sample-only 100000 --max-steps 8000 --max_epochs 5 --n_tokens 60  --dump_path experiment_output --exp_name test_run
+python3 fc_loop.py --sample-only 100000 --max-steps 8000 --max_epochs 5 --n_tokens 60  --dump_path experiment_output --exp_name test_run
 
 **Note that you must always set n_tokens to the number of vertices in the trees you are exploring.** If you are trying to run this on a local machine, the numerical parameters should be made smaller, and you must add the line --cpu true For instance,
 
