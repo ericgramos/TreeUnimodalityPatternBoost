@@ -12,11 +12,6 @@ using JSON
 
 # Choose the problem to work on here!
 
-#include("problem_triangle_free.jl")  
-#include("problem_4_cycle_free.jl")
-#include("problem_permanent_avoid_123.jl")
-#include("problem_erdos_4.0.jl")
-#include("problem_erdos 3.0.jl")
 #include("problem_erdos_6.0.jl")
 #include("problem_erdos_6.0Big.jl") 
 #include("problem_erdos_NoLocal.jl")
