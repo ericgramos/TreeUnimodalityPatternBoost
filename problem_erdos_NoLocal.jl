@@ -1,14 +1,16 @@
+#This version of the code does not do any local optimization. The greedy search function just returns the input unchanged.
+
+
 include("constants.jl")
 using JSON
 using Polynomials
 using DataStructures
 using Random
 const N = 58 #length of prufer code
-#We will look for the breakage at alpha*n - beta
+#We will look for the breakage at alpha*(N+2) - beta
 const alpha =  1/2
 const beta  = 0
-#maximum number of edge swaps allowed before optimization stops.
-const max_swaps = 10
+
 
 
 function star_list(n::Int)::Vector{Vector{Int}}
@@ -179,22 +181,6 @@ function IP(adjg::Vector{Vector{Int}})
     end
 end
 
-"""prufer=[4,4,4,5]
-adjg = prufer_to_adjacency_list(prufer)
-poly = IP(adjg)
-coeffs_array = coeffs(poly)
-index = Int((N+2)/2) + 1
-print(coeffs_array[index])"""
-
-"""
-- randomly add an edge (keep track of edges to add)
-- find the cycle
-- measure the log-concavity of the n/2 index of edges in the cycle
-- find the edge that minimizes the difference
-- check if it is the edge added, if yes, remove it and add another edge
-- return the new graph
-"""
-
 function greedy_search_from_startpoint(db, obj::OBJ_TYPE)::OBJ_TYPE
     return obj  # Return the original object unchanged
 end
@@ -237,23 +223,8 @@ function json_string_to_prufer(json_str::String)::Vector{Int}
     return JSON.parse(json_str)
 end
 
-function count_leaves(prufer::Vector{Int})
-    n = length(prufer) + 2
-    prufer_set = Set(prufer)
-    leaves = [v for v in 1:n if v ∉ prufer_set]
-    return length(leaves)
-end
-
 function empty_starting_point()::OBJ_TYPE
     #TODO: recover sample generation   
     prufer = rand(1:(N+2), N)
-    # check if the number of leaves is less than or equal to n/2
-    #if count_leaves(prufer) <= 5
-    """if count_leaves(prufer) >= floor(Int, (N+2)/2) || count_leaves(prufer) <= 5
-        return empty_starting_point()
-    # if not, generate a new prufer code
-    else
-        return prufer
-    end"""
     return prufer
 end

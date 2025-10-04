@@ -1,4 +1,5 @@
-#Checks log concavity (location user input). Local search will run a fixed number of swaps (user input) before moving on. All computations are done with Big integers
+#Checks log concavity (location user input). Local search will run a fixed number of swaps (user input) before moving on. 
+#All computations are done with Big integers. This version of the code is necessary if N >= 66
 
 
 include("constants.jl")
@@ -7,11 +8,13 @@ using Polynomials
 using DataStructures
 using Random
 const N = 77 #length of prufer code
-#We will look for the breakage at alpha*n - beta
+#We will look for the breakage at alpha*(N+2) - beta
 const alpha =  1/2
 const beta  = 0
 #maximum number of edge swaps allowed before optimization stops.
 const max_swaps = 10
+
+const order_edges = 1
 
 
 function star_list(n::Int)::Vector{Vector{Int}}
@@ -182,22 +185,6 @@ function IP(adjg::Vector{Vector{Int}})
     end
 end
 
-"""prufer=[4,4,4,5]
-adjg = prufer_to_adjacency_list(prufer)
-poly = IP(adjg)
-coeffs_array = coeffs(poly)
-index = Int((N+2)/2) + 1
-print(coeffs_array[index])"""
-
-"""
-- randomly add an edge (keep track of edges to add)
-- find the cycle
-- measure the log-concavity of the n/2 index of edges in the cycle
-- find the edge that minimizes the difference
-- check if it is the edge added, if yes, remove it and add another edge
-- return the new graph
-"""
-
 function greedy_search_from_startpoint(db, obj::OBJ_TYPE)::OBJ_TYPE
     #input a database and a graph in prufer code, return the improved graph in prufer code
 
@@ -220,22 +207,15 @@ function greedy_search_from_startpoint(db, obj::OBJ_TYPE)::OBJ_TYPE
             end
         end
     end
+    
+# Sort edges by having maximum degrees on both ends, if order_edges is set to 1. Randomizes the order of edges if order_edges is set to -1
+    if order_edges == 1
+        none_edges = sort(collect(none_edges), by=kv -> (min(kv[2]...), max(kv[2]...)), rev=true)
+    elseif order_edges == -1
+        none_edges = collect(none_edges)
+        shuffle!(none_edges)
+    end
 
-"""    sorted_edges = sort(
-    collect(none_edges),
-    by = kv -> (abs(kv[2][1] - kv[2][2]), -min(kv[2][1], kv[2][2])),
-    rev = true)"""
-"""    # Sort edges by having maximum degrees on both ends
-    sorted_edges = sort(collect(none_edges), by=kv -> (min(kv[2]...), max(kv[2]...)), rev=true)
-    edge_index = 1"""
-
-"""    while !isempty(none_edges)
-        # conitnue loop until we are able to decrease the goal
-        # randomly add an edge
-        edge_keys = collect(keys(none_edges))
-        edge_to_add = edge_keys[rand(1:length(edge_keys))]
-        # add an edge with maximum sum of degrees
-        edge_to_add = argmax(none_edges)"""
     swaps = 0
 
     for edge_to_add in none_edges
@@ -335,23 +315,9 @@ function json_string_to_prufer(json_str::String)::Vector{Int}
     return JSON.parse(json_str)
 end
 
-function count_leaves(prufer::Vector{Int})
-    n = length(prufer) + 2
-    prufer_set = Set(prufer)
-    leaves = [v for v in 1:n if v ∉ prufer_set]
-    return length(leaves)
-end
 
 function empty_starting_point()::OBJ_TYPE
     #TODO: recover sample generation   
     prufer = rand(1:(N+2), N)
-    # check if the number of leaves is less than or equal to n/2
-    #if count_leaves(prufer) <= 5
-    """if count_leaves(prufer) >= floor(Int, (N+2)/2) || count_leaves(prufer) <= 5
-        return empty_starting_point()
-    # if not, generate a new prufer code
-    else
-        return prufer
-    end"""
     return prufer
 end
