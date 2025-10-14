@@ -5,10 +5,13 @@ This repo contains all of the code used during our exploration of the unimodalit
 
 To run this, first edit the top lines in search_fc.jl to select the local optimization that will be used. The options are:
 
-1.) problem_erdos_6.0.jl - This is the most standard version.
-2.) problem_erdos_6.0Big.jl - This is the version you will need to use if the number of vertices is above 68. It uses BigInt to avoid overflow. **This is the only version with this particular protection on the coefficients of the independence polynomial**. All other versions, however, have overflow protection on the score computation.
-3.) problem_erdos_NoLocal.jl - This is the version which skips local optimization entirely, and only relies on the transformer teaching itself.
-4.) problem_erdos_NoPath.jl - This is the version which punishes the machine if it produces the path graph. It seems necessary to do this if you are look for breakage at an index away from half the number of vertices.
+1. problem_erdos_6.0.jl - This is the most standard version.
+
+2. problem_erdos_6.0Big.jl - This is the version you will need to use if the number of vertices is above 68. It uses BigInt to avoid overflow. **This is the only version with this particular protection on the coefficients of the independence polynomial**. All other versions, however, have overflow protection on the score computation.
+
+3. problem_erdos_NoLocal.jl - This is the version which skips local optimization entirely, and only relies on the transformer teaching itself.
+
+4. problem_erdos_NoPath.jl - This is the version which punishes the machine if it produces the path graph. It seems necessary to do this if you are look for breakage at an index away from half the number of vertices.
 
 Once you've selected the local optimization file, be sure to go into the file to change whatever parameters you need to. This includes the length of the prufer codes that are being used (i.e. two less than the number of vertices), where you are looking for log concavity breakage, as well as the total number of swaps to perform and how non-edges are added during optimization. **IMPORTANTLY, the parameter N in all of these files will be the length of the prufer code being considered, NOT the number of vertices.** In other words, N should be two less than the the number of vertices of the tree.
 
@@ -21,3 +24,5 @@ python3 fc_loop.py --sample-only 100000 --max-steps 8000 --max_epochs 5 --n_toke
 python3 fc_loop.py --cpu true --sample-only 2000 --max-steps 1000 --max_epochs 3 --n_tokens 60 --dump_path experiment_output --exp_name test_run
 
 The file PruferToTree.ipyn is SageMath code that is unnecessary for all of the above computation. It allows you to input any Prufer code, and it will output a drawing of the resulting tree. The file Problem_Erdos_IP.jl is Julia code which allows you to input a prufer code, and it will output its indepednence polynomial, as well as the value of the scoring function at every index of the independence sequence.
+
+Finally, the folder 60_vertex_output contains all of the output files from our application of these methods to the case of trees with 60 vertices.
