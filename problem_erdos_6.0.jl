@@ -18,7 +18,7 @@ const max_swaps = 10
 #determines whether the local optimization sorts edges before adding them. 1 = sorted, 0 = unsorted, -1 = random
 const order_edges = -1
 
-#produces a the adjacency list of a star tree on n vertices.
+#produces the adjacency list of a star tree on n vertices.
 function star_list(n::Int)::Vector{Vector{Int}}
     adj = [Int[] for _ in 1:n]
     for i in 2:n
@@ -330,7 +330,3 @@ function empty_starting_point()::OBJ_TYPE
     prufer = rand(1:(N+2), N)
     return prufer
 end
-
-pr = greedy_search_from_startpoint([],[2,3,4,5,6,7,8,9])
-println("prufer: ", pr)
-
