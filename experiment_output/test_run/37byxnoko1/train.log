@@ -1,0 +1,48 @@
+INFO - 06/21/26 23:10:36 - 0:00:00 - ============ Initialized logger ============
+INFO - 06/21/26 23:10:36 - 0:00:00 - batch_size: 32
+                                     command: python PatternBoost/fc_loop.py --cpu true --sample-only 2000 --max-steps 1000 --max_epochs 3 --n_tokens 26 --dump_path experiment_output --exp_name test_run --exp_id "37byxnoko1"
+                                     cpu: True
+                                     debug: False
+                                     debug_slurm: False
+                                     dump_path: experiment_output/test_run/37byxnoko1
+                                     exp_id: 37byxnoko1
+                                     exp_name: test_run
+                                     final_database_size: 50000
+                                     gen_batch_size: 1000
+                                     global_rank: 0
+                                     is_master: True
+                                     is_slurm_job: False
+                                     learning_rate: 0.0005
+                                     local_rank: 0
+                                     master_port: -1
+                                     max_epochs: 3
+                                     max_output_length: 160
+                                     max_steps: 1000
+                                     multi_gpu: False
+                                     multi_node: False
+                                     n_embd: 64
+                                     n_embd2: 32
+                                     n_gpu_per_node: 1
+                                     n_head: 8
+                                     n_layer: 4
+                                     n_nodes: 1
+                                     n_tokens: 26
+                                     nb_local_searches: 1200
+                                     nb_threads: 1
+                                     node_id: 0
+                                     num_initial_empty_objects: 50000
+                                     num_workers: 8
+                                     sample_only: 2000
+                                     seed: -1
+                                     target_db_size: 50000
+                                     temperature: 1.0
+                                     top_k: -1
+                                     type: transformer
+                                     weight_decay: 0.01
+                                     world_size: 1
+INFO - 06/21/26 23:10:36 - 0:00:00 - The experiment will be stored in experiment_output/test_run/37byxnoko1
+                                     
+INFO - 06/21/26 23:10:36 - 0:00:00 - Running command: python PatternBoost/fc_loop.py --cpu true --sample-only 2000 --max-steps 1000 --max_epochs 3 --n_tokens 26 --dump_path experiment_output --exp_name test_run
+
+INFO - 06/21/26 23:10:37 - 0:00:00 - seed: 402305041
+INFO - 06/21/26 23:10:37 - 0:00:00 - JULIA_NUM_THREADS is set to 1

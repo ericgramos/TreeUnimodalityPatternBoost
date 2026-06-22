@@ -12,10 +12,10 @@ using JSON
 
 # Choose the problem to work on here!
 
-#include("../problem_erdos_6.0.jl")
+include("../problem_erdos_6.0.jl")
 #include("../problem_erdos_6.0Big.jl") 
 #include("../problem_erdos_NoLocal.jl")
-include("../problem_erdos_NoPath.jl")
+#include("../problem_erdos_NoPath.jl")
 
 #must use "Big" version if N >= 66
 

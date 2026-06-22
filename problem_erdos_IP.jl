@@ -190,7 +190,7 @@ function json_string_to_prufer(json_str::String)::Vector{Int}
 end
 
 #Enter the prufer code of the tree you are testing here:
-prufer = [18,21,4,22,7,20,16,10,20,24,17,6,25,25,20,25,20,19,1,22,25,19,22,13]
+prufer = [2,3,4,5]
 
 N = length(prufer) 
 adjg = prufer_to_adjacency_list(prufer)

@@ -19,7 +19,7 @@ The most relevant files in this folder are:
 
 Other files in this folder which are less important are:
 
-- transformer-output-decoded.txt This is the raw output of the final epoch of the transformer. All 150,000 samples in some order.
+- transformer-output-decoded.txt This is the raw output of the final epoch of the transformer before optimization and pruning. All 150,000 samples in some order.
 
 - out.txt is the final tokenized output of the transformer after the 10th, and final in this case, epoch.
 

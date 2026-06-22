@@ -6,7 +6,7 @@ using JSON
 using Polynomials
 using DataStructures
 using Random
-const N = 56 #length of prufer code, two less than the number of vertices.
+const N = 24 #length of prufer code, two less than the number of vertices.
 
 #We will look for the breakage at alpha*(N+2) - beta
 const alpha =  1/2
@@ -16,7 +16,7 @@ const beta  = 0
 const max_swaps = 10
 
 #determines whether the local optimization sorts edges before adding them. 1 = sorted, 0 = unsorted, -1 = random
-const order_edges = -1
+const order_edges = 1
 
 #produces the adjacency list of a star tree on n vertices.
 function star_list(n::Int)::Vector{Vector{Int}}
